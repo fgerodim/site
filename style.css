@@ -1,4 +1,25 @@
-/* Dropdown Desktop */
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background:#f5f7fa; display:flex; justify-content:center; }
+a { text-decoration:none; color:#333; transition: 0.3s; }
+
+/* Container */
+.container { width:100%; max-width:900px; background:white; min-height:100vh; box-shadow:0 8px 30px rgba(0,0,0,0.1); border-radius:12px; overflow:hidden; }
+
+/* Header */
+header { background:#4a90e2; color:white; text-align:center; padding:25px; }
+header img { max-width:250px; margin-bottom:10px; border-radius:8px; }
+header h1 { font-size:28px; margin:0; font-weight:600; }
+
+/* Navbar */
+.navbar { background:#2c3e50; position:relative; }
+.nav-menu { list-style:none; display:flex; justify-content:center; flex-wrap:wrap; }
+.nav-menu li { position:relative; }
+.nav-menu > li { flex:1; text-align:center; }
+.nav-menu a { display:block; padding:15px; color:white; font-weight:500; }
+.nav-menu a:hover { background:#34495e; border-radius:6px; }
+
+/* Dropdown */
 .dropdown {
   display: none;
   position: absolute;
@@ -12,26 +33,20 @@
 .dropdown li a { padding:12px; display:block; text-align:left; }
 .has-dropdown:hover > .dropdown { display:block; }
 
-/* Hamburger mobile */
+/* Hamburger */
 .hamburger { display:none; font-size:26px; cursor:pointer; padding:14px; color:white; background:#2c3e50; text-align:center; }
+
+/* Main content */
+main { padding:30px; line-height:1.6; font-size:16px; color:#333; }
+main h2 { color:#4a90e2; margin-bottom:15px; }
+main p { margin-bottom:20px; }
 
 /* Responsive */
 @media(max-width:768px){
-  .nav-menu { 
-    flex-direction: column; 
-    display: none; 
-    width: 100%; 
-  }
-  .nav-menu.active { display: flex; }
+  .nav-menu { flex-direction: column; display:none; width:100%; }
+  .nav-menu.active { display:flex; }
   .nav-menu li { text-align:left; }
-
-  /* Dropdown mobile: κάτω από parent, εμφανίζεται με active */
-  .dropdown {
-    position: relative; /* Σημαντικό για mobile */
-    display: none;
-    flex-direction: column;
-  }
-  .has-dropdown.active > .dropdown { display: flex; }
-
+  .dropdown { position: relative; display: none; flex-direction: column; }
+  .has-dropdown.active > .dropdown { display:flex; }
   .hamburger { display:block; }
 }
