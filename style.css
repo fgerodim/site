@@ -1,241 +1,52 @@
-/* ================================= */
-/* 1. ΒΑΣΙΚΗ ΔΙΑΤΑΞΗ & ΓΡΑΜΜΑΤΟΣΕΙΡΕΣ */
-/* ================================= */
-* {margin:0;padding:0;box-sizing:border-box;}
-body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:#eef1f5; /* Ανοιχτό γκρι φόντο */
-    display:flex;
-    justify-content:center;
-}
-a {text-decoration:none;color:inherit;}
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background:#f5f7fa; display:flex; justify-content:center; }
+a { text-decoration:none; color:#333; transition: 0.3s; }
 
-.container {
-    max-width:900px;
-    width:100%;
-    background:#fefefe; /* Λευκό κύριο φόντο */
-    min-height:100vh;
-    box-shadow:0 0 40px rgba(0,0,0,.08); /* Διακριτική σκιά */
-    position:relative;
-    overflow:hidden;
-}
+/* Container */
+.container { width:100%; max-width:900px; background:white; min-height:100vh; box-shadow:0 8px 30px rgba(0,0,0,0.1); border-radius:12px; overflow:hidden; }
 
-/* ================================= */
-/* HEADER & NAVIGATION BAR */
-/* ================================= */
-header {
-    background:#1e88e5; /* Έντονο μπλε */
-    color:#fff;
-    text-align:center;
-    padding:20px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.1);
-}
-header img {max-width:180px;margin-bottom:8px;border-radius:10px;}
-header h1 {font-size:20px;font-weight:600;}
+/* Header */
+header { background:#4a90e2; color:white; text-align:center; padding:25px; }
+header img { max-width:250px; margin-bottom:10px; border-radius:8px; }
+header h1 { font-size:28px; margin:0; font-weight:600; }
 
-.navbar {
-    background:none;
-    position:relative;
-}
-.hamburger {
-    display:none;
-    cursor:pointer;
-    padding:12px;
-    font-size:28px;
-    color:#1e88e5;
-    position:absolute;
-    top:0;
-    right:10px;
-    z-index:99999;
-    font-weight:100;
-}
+/* Navbar */
+.navbar { background:#2c3e50; position:relative; }
+.nav-menu { list-style:none; display:flex; justify-content:center; flex-wrap:wrap; }
+.nav-menu li { position:relative; }
+.nav-menu > li { flex:1; text-align:center; }
+.nav-menu a { display:block; padding:15px; color:white; font-weight:500; }
+.nav-menu a:hover { background:#34495e; border-radius:6px; }
 
-/* ================================= */
-/* DESKTOP MENU (Classic Bar) */
-/* ================================= */
-.nav-menu {
-    list-style:none;
-    display:flex;
-    justify-content:center;
-    background:#fff;
-    border-bottom:1px solid #eee;
-    margin:0;
-    padding:0;
-}
-.nav-menu>li {position:relative;}
-.nav-menu a {
-    display:flex;
-    align-items:center;
-    padding:15px 20px;
-    color:#333;
-    font-size:15px;
-    transition:.3s;
-}
-.nav-menu a:hover {
-    color:#1e88e5;
-    background:#f7f7f7;
-}
-
-/* Icons styling */
-.nav-menu i {
-    margin-right:10px;
-    font-size:16px;
-    color:#777;
-    transition:.3s;
-}
-.nav-menu a:hover i {
-    color:#1e88e5;
-}
-
-/* Desktop dropdowns */
+/* Dropdown */
 .dropdown {
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    background:#fff;
-    min-width:240px;
-    box-shadow:0 8px 30px rgba(0,0,0,.15);
-    z-index:1000;
-    border-radius:8px;
-    overflow:hidden;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #34495e;
+  min-width: 160px;
+  border-radius: 6px;
+  overflow: hidden;
 }
+.dropdown li a { padding:12px; display:block; text-align:left; }
+.has-dropdown:hover > .dropdown { display:block; }
 
-/* Στο desktop, το dropdown εμφανίζεται με hover */
-.nav-menu>li:hover>.dropdown {
-    display:block;
-}
+/* Hamburger */
+.hamburger { display:none; font-size:26px; cursor:pointer; padding:14px; color:white; background:#2c3e50; text-align:center; }
 
-/* Dropdown link styling */
-.dropdown a {
-    padding:12px 15px;
-    font-size:14px;
-    color:#555;
-    transition:.2s;
-    /* Αφαιρούμε τα icons από τα dropdowns για λιγότερη φλυαρία */
-}
-.dropdown a:hover {
-    background:#e0f7fa; /* Πολύ ανοιχτό γαλάζιο */
-    color:#00796b; /* Σκούρο κυανό */
-}
+/* Main content */
+main { padding:30px; line-height:1.6; font-size:16px; color:#333; }
+main h2 { color:#4a90e2; margin-bottom:15px; }
+main p { margin-bottom:20px; }
 
-/* Βελάκια (Desktop) */
-.has-dropdown>a::after {
-  content: "▾"; /* Χρησιμοποιούμε απλό χαρακτήρα */
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  margin-left:12px;
-  color:#aaa;
-  float:right;
-  transition:transform .3s;
-}
-
-/* Όταν είναι ανοιχτό στο mobile (εδώ δεν χρειάζεται στο desktop) */
-.has-dropdown.active>a::after {
-    transform:rotate(180deg); 
-}
-
-/* ================================= */
-/* MAIN CONTENT (Από το προηγούμενο, για συνέπεια) */
-/* ================================= */
-main {padding:25px;line-height:1.7;color:#333;}
-main h2 {margin-top:20px;margin-bottom:15px;font-size:22px;color:#1e88e5;border-bottom:2px solid #eee;padding-bottom:5px;}
-main section {background:#fff;padding:20px;margin-bottom:20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.05);}
-
-/* ================================= */
-/* MOBILE (Sidebar Menu & Accordion) */
-/* ================================= */
+/* Responsive */
 @media(max-width:768px){
-  /* Εμφάνιση Hamburger Icon */
-  .hamburger{display:block;}
-  .nav-menu {display:none;} /* Κρύβουμε το desktop menu bar */
-
-  /* Menu Container (Overlay) */
-  .nav-menu-container {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      pointer-events:none;
-      transition:background .4s;
-      z-index:9999;
-  }
-  .nav-menu-container.active {
-      background:rgba(0, 0, 0, 0.5);
-      pointer-events:auto;
-  }
-  
-  /* Κύριο Μενού (Sidebar) */
-  .nav-menu-container .nav-menu {
-    display:flex;
-    position:fixed;
-    top:0;
-    left:-280px; /* Κρυμμένο αριστερά */
-    width:280px;
-    max-height:100vh;
-    overflow-y:auto;
-    flex-direction:column;
-    background:#2c3e50; /* Σκούρο φόντο */
-    transition:left .4s ease-out;
-    box-shadow: 4px 0 20px rgba(0,0,0,.5);
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  .nav-menu-container .nav-menu.active{left:0;} /* Εμφανίζεται */
-
-  .nav-menu a {
-      color:#ecf0f1;
-      padding:15px 20px;
-  }
-  .nav-menu a:hover {
-      background:#34495e;
-      color:#1e88e5;
-  }
-  .nav-menu i {color:#a4b0be;}
-  .nav-menu a:hover i {color:#1e88e5;}
-
-  /* Mobile Dropdowns (Accordion Style) */
-  .dropdown {
-    position:static; /* Σημαντικό για το accordion */
-    background:#34495e; /* Ελαφρώς πιο ανοιχτό */
-    display:none;
-    box-shadow:none;
-    border-radius:0;
-  }
-
-  /* Το dropdown εμφανίζεται μόνο αν η LI έχει κλάση 'active' */
-  li.has-dropdown.active > .dropdown {
-    display:block;
-  }
-
-  /* Indentation */
-  .dropdown a {
-    padding-left:40px; /* Εσοχή */
-    font-size:14px;
-    color:#ecf0f1;
-  }
-  .dropdown a:hover {
-      background:#3e556e; /* Ελαφρώς πιο ανοιχτό στο hover */
-      color:#1e88e5;
-  }
-  .dropdown a i {display:none;} /* Κρύβουμε icons στα dropdowns */
-  
-  /* Mobile βελάκια */
-  .has-dropdown>a::after {
-      content:"▾";
-      float:right;
-      font-size:14px;
-      color:#ecf0f1;
-      transition:transform .3s;
-  }
-  .has-dropdown.active>a::after {
-      transform:rotate(180deg); /* Περιστρέφουμε 180 μοίρες όταν είναι ανοιχτό */
-  }
-
-  .container.menu-open {
-      overflow:hidden; 
-  }
+  .nav-menu { flex-direction: column; display:none; width:100%; }
+  .nav-menu.active { display:flex; }
+  .nav-menu li { text-align:left; }
+  .dropdown { position: relative; display: none; flex-direction: column; }
+  .has-dropdown.active > .dropdown { display:flex; }
+  .hamburger { display:block; }
 }
