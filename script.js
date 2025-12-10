@@ -4,20 +4,34 @@ fetch('menu.html')
   .then(data => {
     document.querySelector('.nav-menu-container').innerHTML = data;
 
-    // Ενεργοποίηση drop-down και hamburger μετά τη φόρτωση
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
+    // Hamburger toggle
     hamburger.addEventListener('click', () => {
       navMenu.classList.toggle('active');
     });
 
+    // Dropdowns 1ου επιπέδου
     const dropdowns = document.querySelectorAll('.has-dropdown');
     dropdowns.forEach(drop => {
-      drop.addEventListener('click', e => {
+      const link = drop.querySelector('a');
+      link.addEventListener('click', e => {
         if(window.innerWidth <= 768){
-          e.stopPropagation();
-          drop.classList.toggle('active');
+          e.preventDefault(); // Αποτροπή navigation
+          drop.classList.toggle('active'); // Toggle show/hide
+        }
+      });
+    });
+
+    // Sub-dropdowns (2ου επιπέδου)
+    const subDropdowns = document.querySelectorAll('.has-subdropdown');
+    subDropdowns.forEach(drop => {
+      const link = drop.querySelector('a');
+      link.addEventListener('click', e => {
+        if(window.innerWidth <= 768){
+          e.preventDefault(); // Αποτροπή navigation
+          drop.classList.toggle('active'); // Toggle show/hide
         }
       });
     });
