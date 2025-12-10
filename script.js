@@ -11,24 +11,26 @@ fetch('menu.html')
       navMenu.classList.toggle('active');
     });
 
-    // Dropdown toggle (mobile) με κλείσιμο άλλων dropdowns
+    // Mobile dropdown toggle με σωστό behavior
     navMenu.addEventListener('click', e => {
-      if(window.innerWidth <= 768){
+      if (window.innerWidth <= 768) {
         const li = e.target.closest('.has-dropdown');
-        if(li && e.target.tagName === 'A'){
-          e.preventDefault();
+        if (li && e.target.tagName === 'A') {
+          const dropdown = li.querySelector('.dropdown');
 
-          // Αν το li είναι ήδη active, κλείνουμε μόνο αυτό
-          if(li.classList.contains('active')){
-            li.classList.remove('active');
-          } else {
-            // Κλείνουμε όλα τα άλλα dropdowns
+          if (dropdown) {
+            // Αν έχει υπομενού, toggle χωρίς να πηγαίνουμε στο link
+            e.preventDefault();
+
+            // Κλείνουμε τα υπόλοιπα dropdowns
             navMenu.querySelectorAll('.has-dropdown.active').forEach(other => {
-              other.classList.remove('active');
+              if (other !== li) other.classList.remove('active');
             });
-            // Ανοίγουμε το επιλεγμένο
-            li.classList.add('active');
+
+            // Toggle του τρέχοντος
+            li.classList.toggle('active');
           }
+          // Αν δεν έχει dropdown, αφήνουμε το link να φορτώσει τη σελίδα
         }
       }
     });
