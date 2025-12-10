@@ -6,19 +6,39 @@ fetch('menu.html')
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
-    // Toggle Hamburger Menu
-    hamburger.addEventListener('click', () => {
+    // Hamburger toggle
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation(); // σημαντικό
       navMenu.classList.toggle('active');
+      hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
     });
 
-    // Dropdown toggle (mobile)
-    navMenu.addEventListener('click', e => {
-      if(window.innerWidth <= 768){
-        const li = e.target.closest('.has-dropdown');
-        if(li && e.target.tagName === 'A'){
-          e.preventDefault();
-          li.classList.toggle('active');
-        }
+    // Κλικ μέσα στο μενού (μόνο σε κινητό)
+    navMenu.addEventListener('click', (e) => {
+      if (window.innerWidth > 768) return; // μόνο για mobile
+
+      const clickedLink = e.target.closest('a');
+      if (!clickedLink) return;
+
+      const parentLi = clickedLink.parentElement;
+
+      // Αν το <a> είναι μέσα σε .has-dropdown (δηλ. είναι το "Θεωρία" ή "Ασκήσεις")
+      if (parentLi.classList.contains('has-dropdown')) {
+        // Είναι το γονικό μενού → ανοίγω/κλείνω το dropdown, ΜΗΝ πας στη σελίδα
+        e.preventDefault();
+        parentLi.classList.toggle('active');
+      }
+      // αλλιώς είναι κανονικός σύνδεσμος (Αρχική, Κεφάλαιο 1, Επικοινωνία κλπ)
+      // → ΔΕΝ κάνουμε preventDefault → ο browser πάει κανονικά στη σελίδα
+    });
+
+    // Κλείσιμο μενού όταν πατάμε έξω
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && navMenu.classList.contains('active') && !e.target.closest('.navbar')) {
+        navMenu.classList.remove('active');
+        hamburger.textContent = '☰';
       }
     });
-  });
+
+  })
+  .catch(err => console.error('Error loading menu:', err));
