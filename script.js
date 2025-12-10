@@ -6,31 +6,29 @@ fetch('menu.html')
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
-    // Toggle Hamburger Menu
+    // 1. Toggle Hamburger Menu (Mobile)
     hamburger.addEventListener('click', () => {
       navMenu.classList.toggle('active');
     });
 
-    // Mobile dropdown toggle με σωστό behavior
+    // 2. Toggle Dropdown Menu (Mobile)
     navMenu.addEventListener('click', e => {
-      if (window.innerWidth <= 768) {
+      if(window.innerWidth <= 768){
         const li = e.target.closest('.has-dropdown');
-        if (li && e.target.tagName === 'A') {
+        if(li && e.target.tagName === 'A'){
           const dropdown = li.querySelector('.dropdown');
 
-          if (dropdown) {
-            // Αν έχει υπομενού, toggle χωρίς να πηγαίνουμε στο link
-            e.preventDefault();
+          if(dropdown){
+            e.preventDefault(); // Μόνο για parent με dropdown
 
             // Κλείνουμε τα υπόλοιπα dropdowns
             navMenu.querySelectorAll('.has-dropdown.active').forEach(other => {
-              if (other !== li) other.classList.remove('active');
+              if(other !== li) other.classList.remove('active');
             });
 
-            // Toggle του τρέχοντος
+            // Toggle το τρέχον
             li.classList.toggle('active');
           }
-          // Αν δεν έχει dropdown, αφήνουμε το link να φορτώσει τη σελίδα
         }
       }
     });
