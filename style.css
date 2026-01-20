@@ -138,3 +138,37 @@ a.file-link:hover{
     display:block;
   }
 }
+/* SIMPLE FOOTER */
+
+.simple-footer {
+  background: #0f172a; /* Το ίδιο χρώμα με το header σας */
+  color: white;
+  padding: 30px 20px;
+  margin-top: 60px;
+  text-align: center;
+  border-top: 3px solid #1e3a8a; /* Μια διακριτική λεπτομέρεια χρώματος */
+}
+
+.footer-info p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.footer-info strong {
+  font-size: 1.1rem;
+  color: #eef2ff;
+}
+
+.copyright {
+  margin-top: 15px;
+  font-size: 0.8rem !important;
+  opacity: 0.6 !important;
+}
+
+/* Προσαρμογή για μικρές οθόνες */
+@media(max-width: 600px) {
+  .simple-footer {
+    padding: 20px 15px;
+  }
+}
